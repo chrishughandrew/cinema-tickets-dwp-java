@@ -10,7 +10,24 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
-
     }
+    //TODO: null check on ticketTypeRequests?
+
+
+    @Override
+    // TODO: should be private
+    public void accountIsValid(Long accountId) throws InvalidPurchaseException {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
+    // TODO: should be private
+    public void validateRequest(int maxAllowedTickets, TicketTypeRequest... ticketTypeRequests)
+            throws InvalidPurchaseException {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }
