@@ -43,30 +43,72 @@ public class TicketServiceTests {
         //assert - via the @Rule
     }
 
-    // @Test
-    // public void purchaseTickets_ThrowsInvalidPurchaseException_WhenRequestedQtyExceedsMax(){
-    //     //arrange
-    //     exception.expect(InvalidPurchaseException.class);
-    //     exception.expectMessage("The maximum number of tickets has been exceeded");
-
-    //     TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 2);
-    //     TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+    @Test
+    public void purchaseTickets_ThrowsInvalidPurchaseException_WhenRequestedQtyExceedsMax(){
+        //arrange
+        exception.expect(InvalidPurchaseException.class);
+        exception.expectMessage("The maximum number of tickets has been exceeded");
         
-    //     //act
-    //     ticketService.ticketQuantityWithinMaxBounds(request1, request2);
-
-    //     //assert - via the @Rule
-    // }
-
-    // @Test
-    // public void purchaseTickets_DoesNotThrow_WhenRequestedQtyWithinMax(){
-    //     //arrange 
-    //     TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
-    //     TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+        Long accountId = 20L;
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 2);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
         
-    //     //act
-    //     ticketService.ticketQuantityWithinMaxBounds(request1, request2);
+        //act
+        ticketService.purchaseTickets(accountId, request1, request2);
 
-    //     //assert - via the @Rule
-    // }
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void purchaseTickets_DoesNotThrow_WhenRequestedQtyWithinMax(){
+        //arrange 
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+        Long accountId = 20L;
+        //act
+        ticketService.purchaseTickets(accountId, request1, request2);
+
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void purchaseTickets_ThrowsInvalidPurchaseException_WhenRequestedInfantsExceedsAdults(){
+        //arrange
+        exception.expect(InvalidPurchaseException.class);
+        exception.expectMessage("There should be an adult's knee for every infant present");
+        
+        Long accountId = 20L;
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 19);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 1);
+        
+        //act
+        ticketService.purchaseTickets(accountId, request1, request2);
+
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void purchaseTickets_DoesNotThrow_WhenRequestedAdultsExceedInfants(){
+        //arrange 
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+        Long accountId = 20L;
+        //act
+        ticketService.purchaseTickets(accountId, request1, request2);
+
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void purchaseTickets_DoesNotThrow_WhenRequestedAdultsMatchInfants(){
+        //arrange 
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.INFANT, 2);
+        TicketTypeRequest request3 = new TicketTypeRequest(Type.ADULT, 10);
+        Long accountId = 20L;
+        //act
+        ticketService.purchaseTickets(accountId, request1, request2, request3);
+
+        //assert - via the @Rule
+    }
 }
