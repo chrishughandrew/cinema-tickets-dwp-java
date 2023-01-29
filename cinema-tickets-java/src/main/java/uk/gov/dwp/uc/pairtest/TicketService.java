@@ -7,8 +7,4 @@ public interface TicketService {
 
     void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException;
 
-    void accountIsValid(Long accountId) throws InvalidPurchaseException;
-
-    void validateRequest(int maxAllowedTickets, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException;
- 
 }
