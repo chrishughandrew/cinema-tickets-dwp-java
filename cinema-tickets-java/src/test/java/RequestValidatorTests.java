@@ -11,6 +11,7 @@ public class RequestValidatorTests {
     
     //setup the implemetation to test
     private RequestValidatorImpl requestValidator = new RequestValidatorImpl();
+    static final int MAX_TICKETS = 20;
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -20,10 +21,10 @@ public class RequestValidatorTests {
         //arrange
         exception.expect(InvalidPurchaseException.class);
         exception.expectMessage("Every request requires an Adult ticket");
-        //var request = new TicketTypeRequest(Type.INFANT, 1);
+        var request = new TicketTypeRequest(Type.INFANT, 1);
         
         //act
-        requestValidator.requestHasAdultTicket(new TicketTypeRequest(Type.INFANT, 1));
+        requestValidator.requestHasAdultTicket(request);
 
         //assert - via the @Rule
     }
@@ -31,8 +32,8 @@ public class RequestValidatorTests {
     @Test
     public void requestHasAdultTicket_DoesNotThrow_WhenAdultTicketPresent(){
         //arrange
-        var request1 = new TicketTypeRequest(Type.INFANT, 1);
-        var request2 = new TicketTypeRequest(Type.ADULT, 1);
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 1);
         
         //act
         requestValidator.requestHasAdultTicket(request1, request2);
@@ -40,4 +41,30 @@ public class RequestValidatorTests {
         //assert - via the @Rule
     }
 
+    @Test
+    public void ticketQuantityWithinMaxBound_ThrowsInvalidPurchaseException_WhenRequestedQtyExceedsMax(){
+        //arrange
+        exception.expect(InvalidPurchaseException.class);
+        exception.expectMessage("The maximum number of tickets has been exceeded");
+
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 2);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+        
+        //act
+        requestValidator.ticketQuantityWithinMaxBounds(MAX_TICKETS, request1, request2);
+
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void ticketQuantityWithinMaxBound_DoesNotThrow_WhenRequestedQtyWithinMax(){
+        //arrange 
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.INFANT, 1);
+        TicketTypeRequest request2 = new TicketTypeRequest(Type.ADULT, 19);
+        
+        //act
+        requestValidator.ticketQuantityWithinMaxBounds(MAX_TICKETS, request1, request2);
+
+        //assert - via the @Rule
+    }
 }
