@@ -5,7 +5,7 @@ import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest.Type;
 import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 public class TicketServiceImpl implements TicketService {
-    private static final int MAX_TICKETS = 20; //TODO: these accessors feel wrong
+    private static final int MAX_TICKETS = 20;
     
     /**
      * Should only have private methods other than the one below.
@@ -13,7 +13,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
-        //TODO: null check on ticketTypeRequests?
+        
+        if (ticketTypeRequests == null) throw new IllegalArgumentException();
+
         validateRequest(ticketTypeRequests);
     }
 
@@ -27,8 +29,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
 
-    private void accountIsValid(Long accountId) throws InvalidPurchaseException {
-        // TODO Auto-generated method stub
+    private void validateAccount(Long accountId) throws InvalidPurchaseException {
+        throw new UnsupportedOperationException();
         
     }
     
@@ -41,12 +43,10 @@ public class TicketServiceImpl implements TicketService {
      * @exception InvalidPurchaseException indvalidates the request and advises that adult is required 
      */
     private void requestHasAdultTicket(TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
-        for(TicketTypeRequest request :ticketTypeRequests){
-            if (request.getTicketType() == Type.ADULT && request.getNoOfTickets() > 0){
+        if (sumOfRequestedTicketsByType(Type.ADULT, ticketTypeRequests) > 0){
                 return;
-            }
         }
-        
+            
         throw new InvalidPurchaseException("Every request requires an Adult ticket");  
     }
 
@@ -83,8 +83,14 @@ public class TicketServiceImpl implements TicketService {
         
     }
 
-    private int sumOfRequestedTicketsByType(Type type, TicketTypeRequest ticketTypeRequest){
-        throw new UnsupportedOperationException();
+    private int sumOfRequestedTicketsByType(Type type, TicketTypeRequest... ticketTypeRequests){
+        int totalTicketsForType = 0;
+        for (TicketTypeRequest request : ticketTypeRequests){
+            if (request.getTicketType() == type) 
+                totalTicketsForType += request.getNoOfTickets();
+        }
+
+        return totalTicketsForType;
     }
 
     // private int sumOfRequiredSeats(TicketTypeRequest ticketTypeRequest){
