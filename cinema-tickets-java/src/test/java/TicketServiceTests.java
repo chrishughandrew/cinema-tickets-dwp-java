@@ -111,4 +111,29 @@ public class TicketServiceTests {
 
         //assert - via the @Rule
     }
+
+    @Test
+    public void purchaseTickets_ThrowsIllegalArgumentException_WhenNullIsPassedAsTicketRequestTypeArgument(){
+        //arrange
+        exception.expect(IllegalArgumentException.class);
+        
+        Long accountId = 20L;
+
+        //act
+        ticketService.purchaseTickets(accountId, null);
+
+        //assert - via the @Rule
+    }
+
+    @Test
+    public void purchaseTickets_DoesNotThrow_WhenTicketRequestTypeIsPassedAsArgument(){
+        //arrange 
+        TicketTypeRequest request1 = new TicketTypeRequest(Type.ADULT, 1);
+        Long accountId = 20L;
+        //act
+        ticketService.purchaseTickets(accountId, request1);
+
+        //assert - via the @Rule
+    }
+
 }

@@ -14,7 +14,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
         
-        //TODO: if (ticketTypeRequests == null) throw new IllegalArgumentException();
+        if (ticketTypeRequests == null) throw new IllegalArgumentException();
 
         //TODO: validateAccount(accountId);
         validateRequest(ticketTypeRequests);
@@ -95,7 +95,7 @@ public class TicketServiceImpl implements TicketService {
 
     /** 
      * Adds together the quantity of all tickets, given a particular type, from the overall 
-     * collection of requests and returns the total.
+     * collection of requests, returning the total.
      * 
      * @param type  the type of ticket request made: Adult, Child, or Infant
      * @param ticketTypeRequests the collection of type requests which constitutes the whole request
