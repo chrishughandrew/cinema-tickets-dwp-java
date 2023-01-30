@@ -26,7 +26,13 @@ public class RequestCalculator {
         return totalTicketsForType;
     }
 
-    // private int sumOfRequiredSeatsFromRequest(TicketTypeRequest ticketTypeRequest){
-        //throw new UnsupportedOperationException();
-    // }
+    /** 
+     * Adds together the number of seats required for a reservation. Infants do not require a seat
+     * 
+     * @param ticketTypeRequests the collection of type requests which constitutes the whole request
+     * @return the total number of seats required
+     */
+    public static int sumOfRequiredSeatsFromRequest(TicketTypeRequest ticketTypeRequest){
+        throw new UnsupportedOperationException();
+    }
 }

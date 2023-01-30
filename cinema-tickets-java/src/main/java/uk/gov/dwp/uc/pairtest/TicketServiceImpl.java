@@ -13,17 +13,26 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
         
+        //null checks on arguments
         if (ticketTypeRequests == null) throw new IllegalArgumentException();
-        //TODO: if (accountId == null) throw new IllegalArgumentException();
+        if (accountId == null) throw new IllegalArgumentException();
 
-        //TODO: validateAccount(accountId);
+        //validate account and requests
+        AccountValidator.validateAccountId(accountId);
         validateRequest(ticketTypeRequests);
+
+        //sum up the ticket costs and make payment
+        
+        //sum up the required seats and reserve
+
+
+ 
     }
 
 
     /** 
      * Validates the range of buisiness rules related to the complete request and throws an exception
-     * if any rules have been violated. Continues with normal flow of execution  if rules are met. 
+     * if any rules have been violated. Continues with normal flow of execution if rules are met. 
      * 
      * @param ticketTypeRequests the collection of type requests which constitutes the whole request
      * @exception InvalidPurchaseException indvalidates the request and advises which rule has been broken 

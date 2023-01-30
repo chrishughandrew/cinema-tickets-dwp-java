@@ -15,10 +15,8 @@ public class TicketServiceTests {
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-
-
     @Test
-    public void purchaseTickets_ThrowsIllegalArgumentException_WhenNullIsPassedAsTicketRequestTypeArgument(){
+    public void purchaseTickets_ThrowsIllegalArgumentException_WhenTicketTypeRequestArgumentIsNull(){
         //arrange
         exception.expect(IllegalArgumentException.class);
         
@@ -31,12 +29,14 @@ public class TicketServiceTests {
     }
 
     @Test
-    public void purchaseTickets_DoesNotThrow_WhenTicketRequestTypeIsPassedAsArgument(){
-        //arrange 
-        TicketTypeRequest request1 = new TicketTypeRequest(Type.ADULT, 1);
-        Long accountId = 20L;
+    public void purchaseTickets_ThrowsIllegalArgumentException_WhenAccountIdArgumentIsNull(){
+        //arrange
+        exception.expect(IllegalArgumentException.class);
+        
+        TicketTypeRequest request = new TicketTypeRequest(Type.ADULT, 1);
+
         //act
-        ticketService.purchaseTickets(accountId, request1);
+        ticketService.purchaseTickets(null, request);
 
         //assert - via the @Rule
     }
