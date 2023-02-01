@@ -6,8 +6,8 @@ package uk.gov.dwp.uc.pairtest.domain;
 
 public class TicketTypeRequest {
 
-    private int noOfTickets;
-    private Type type;
+    private final int noOfTickets;
+    private final Type type;
 
     public TicketTypeRequest(Type type, int noOfTickets) {
         this.type = type;
@@ -24,6 +24,19 @@ public class TicketTypeRequest {
 
     public enum Type {
         ADULT, CHILD , INFANT
+    }
+
+    public int getTicketPrice() {
+        int price;
+        
+        switch (type){
+            case ADULT -> price = 20;
+            case CHILD -> price = 10;
+            case INFANT-> price = 0;
+            default -> throw new IllegalStateException("Ticket type price not implemented.");
+        }
+        
+        return price;
     }
 
 }
