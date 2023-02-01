@@ -39,4 +39,18 @@ public class RequestCalculator {
         
         return seatTotal;
     }
+
+        /** 
+     * Adds together the prices of all tickets from the request.
+     * 
+     * @param ticketTypeRequests the collection of type requests which constitutes the whole request
+     * @return the total cost of the tickets
+     */
+    public static int sumRequestCost(TicketTypeRequest... ticketTypeRequests){
+        int totalCost = 0; 
+        for (TicketTypeRequest request: ticketTypeRequests)
+            totalCost += request.getNoOfTickets() * request.getTicketPrice();
+
+        return totalCost;
+    }
 }

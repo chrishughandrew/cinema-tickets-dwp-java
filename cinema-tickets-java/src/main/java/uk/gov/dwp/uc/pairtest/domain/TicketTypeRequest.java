@@ -26,4 +26,17 @@ public class TicketTypeRequest {
         ADULT, CHILD , INFANT
     }
 
+    public int getTicketPrice() {
+        int price;
+        
+        switch (type){
+            case ADULT -> price = 20;
+            case CHILD -> price = 10;
+            case INFANT-> price = 0;
+            default -> throw new IllegalStateException("Ticket type price not implemented.");
+        }
+        
+        return price;
+    }
+
 }

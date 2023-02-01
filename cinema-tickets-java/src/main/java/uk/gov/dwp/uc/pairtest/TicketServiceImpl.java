@@ -5,7 +5,9 @@ import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 public class TicketServiceImpl implements TicketService {
     
-    // TODO: ideally inject the payment and reservation interfaces through constructor
+    public TicketServiceImpl() {
+        super();
+    }
 
     /**
      * Should only have private methods other than the one below.
@@ -26,7 +28,6 @@ public class TicketServiceImpl implements TicketService {
         
         //sum up the required seats and reserve
 
-
  
     }
 
@@ -45,6 +46,8 @@ public class TicketServiceImpl implements TicketService {
         RequestValidator.ticketQuantityWithinMaxBounds(ticketTypeRequests);
         RequestValidator.infantsDoNotExceedAdults(ticketTypeRequests);
     }
+
+
 
 
     

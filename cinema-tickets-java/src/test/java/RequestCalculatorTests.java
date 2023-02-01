@@ -93,7 +93,7 @@ public class RequestCalculatorTests {
         TicketTypeRequest[] request = 
         {
             new TicketTypeRequest(Type.INFANT, 3),
-            new TicketTypeRequest(Type.INFANT, 1),
+            new TicketTypeRequest(Type.INFANT, 1)
 
         };
 
@@ -105,4 +105,30 @@ public class RequestCalculatorTests {
         assertNotNull(result);
         assertEquals(expectedTotal, result);
     }
+
+    // I acknowledge I should really use parameterized testing for these final tests 
+    //(and around the suite): if there was more time, I would learn
+    // this technique for this language.
+    @Test
+    public void sumRequestCost_CacluatesCorrectly(){
+        //arrange
+        TicketTypeRequest[] request = 
+        {
+            new TicketTypeRequest(Type.ADULT, 3),
+            new TicketTypeRequest(Type.INFANT, 3),
+            new TicketTypeRequest(Type.CHILD, 3),
+            new TicketTypeRequest(Type.INFANT, 1)
+
+        };
+
+        int expectedCost = 90;
+
+        //act
+        int result = RequestCalculator.sumRequestCost(request);
+        //assert
+        assertNotNull(result);
+        assertEquals(expectedCost, result);
+    }
+
+    //TODO: would benefit more repetitions of this test (parameterised) and could probably do with edge cases.
 }
