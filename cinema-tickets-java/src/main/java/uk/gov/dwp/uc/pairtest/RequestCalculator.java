@@ -32,7 +32,11 @@ public class RequestCalculator {
      * @param ticketTypeRequests the collection of type requests which constitutes the whole request
      * @return the total number of seats required
      */
-    public static int sumOfRequiredSeatsFromRequest(TicketTypeRequest ticketTypeRequest){
-        throw new UnsupportedOperationException();
+    public static int sumOfRequiredSeatsFromRequest(TicketTypeRequest... ticketTypeRequests){
+        int seatTotal =
+            sumOfRequestedTicketsByType(Type.ADULT, ticketTypeRequests) + 
+            sumOfRequestedTicketsByType(Type.CHILD, ticketTypeRequests);
+        
+        return seatTotal;
     }
 }

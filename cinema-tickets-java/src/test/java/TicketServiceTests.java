@@ -5,11 +5,10 @@ import org.junit.rules.ExpectedException;
 import uk.gov.dwp.uc.pairtest.TicketServiceImpl;
 import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest;
 import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest.Type;
-import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 public class TicketServiceTests {
     
-    //setup the implemetation to test
+    //setup the implemetation to test -  there must be a better way of doing this?
     private TicketServiceImpl ticketService= new TicketServiceImpl();
 
     @Rule

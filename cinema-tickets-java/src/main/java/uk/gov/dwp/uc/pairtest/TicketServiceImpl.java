@@ -1,11 +1,12 @@
 package uk.gov.dwp.uc.pairtest;
 
 import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest;
-import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest.Type;
 import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 public class TicketServiceImpl implements TicketService {
     
+    // TODO: ideally inject the payment and reservation interfaces through constructor
+
     /**
      * Should only have private methods other than the one below.
      */
@@ -31,7 +32,7 @@ public class TicketServiceImpl implements TicketService {
 
 
     /** 
-     * Validates the range of buisiness rules related to the complete request and throws an exception
+     * Validates the range of buisiness rules related to the complete request, and throws an exception
      * if any rules have been violated. Continues with normal flow of execution if rules are met. 
      * 
      * @param ticketTypeRequests the collection of type requests which constitutes the whole request
